@@ -26,6 +26,17 @@ const connectDB = async() =>{
 }
 connectDB();
 
+const exchangeSchema = new mongoose.Schema({
+    name: String,
+    symbol: String,
+    iconUrl: String,
+  });
+  
+  const Exchange = mongoose.model('Exchange', exchangeSchema);
+  
+
+
+
 
 app.listen(process.env.PORT, () =>{
     console.log(`Server is listening at http://localhost:${process.env.PORT}`);
