@@ -104,6 +104,12 @@
 .navbar-link:hover {
   background-color: #ccc;
 }
+.exchange-line {
+  width: 1.5px;
+  height: 100%;
+  background-color: #c74949;
+  margin-left: 20px;
+}
 
 
 @media (prefers-reduced-motion: no-preference) {
@@ -135,3 +141,63 @@
     transform: rotate(360deg);
   }
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination-button {
+  border: none;
+  background-color: #486bde;
+  color: #333;
+  padding: 8px 12px;
+  cursor: pointer;
+  margin: 0 4px;
+  border-radius: 4px;
+}
+
+.pagination-button.active {
+  background-color: #333;
+  color: #fff;
+}
+
+.pagination-button.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pagination-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.pagination-item {
+  display: flex;
+}
+
+.pagination-item:last-child {
+  margin-right: 8px;
+}
+
+.pagination-item:last-child .pagination-button {
+  margin-right: 0;
+}
+
+.pagination-item:first-child {
+  margin-left: 8px;
+}
+
+.pagination-item:first-child .pagination-button {
+  margin-left: 0;
+}
+
+.exchange-number{
+  padding-right: 2rem;
+}
+
+
+

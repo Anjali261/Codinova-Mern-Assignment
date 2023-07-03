@@ -110,39 +110,49 @@ const ExchangeList = () => {
         </button>
       </form>
 
-      <ul className="exchange-list">
-        {currentExchanges.map((exchange) => (
+      <ol className="exchange-list">
+        {currentExchanges.map((exchange, index) => (
           <li key={exchange._id} className="exchange-item">
+            <span className="exchange-number">{index + 1}</span>
             <img src={exchange.icon} alt={exchange.name} className="exchange-icon" />
             <span>{exchange.name}</span>
           </li>
         ))}
-      </ul>
+      </ol>
 
       <div className="pagination">
         {/* Previous Button */}
-        {currentPage > 1 && (
-          <button className="pagination-button" onClick={prevPage}>
-            Previous
-          </button>
-        )}
+        <button
+          className={`pagination-button ${currentPage === 1 ? 'disabled' : ''}`}
+          onClick={prevPage}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
 
         {/* Page Numbers */}
         <ul className="pagination-list">
-          {Array.from({ length: Math.ceil(filteredExchanges.length / exchangesPerPage) }).map(
-            (_, index) => (
-              <li key={index} className="pagination-item">
+          {Array.from({ length: Math.ceil(filteredExchanges.length / exchangesPerPage) })
+            .map((_, index) => index + 1)
+            .filter(
+              (page) =>
+                page === 1 ||
+                page === currentPage ||
+                page === currentPage + 1 ||
+                page === currentPage - 1
+            )
+            .map((page) => (
+              <li key={page} className="pagination-item">
                 <button
-                  onClick={() => paginate(index + 1)}
+                  onClick={() => paginate(page)}
                   className={`pagination-button ${
-                    currentPage === index + 1 ? 'active' : ''
+                    currentPage === page ? 'active' : ''
                   }`}
                 >
-                  {index + 1}
+                  {page}
                 </button>
               </li>
-            )
-          )}
+            ))}
         </ul>
 
         {/* Next Button */}
@@ -175,11 +185,15 @@ const App = () => {
       </nav>
 
       <Routes>
-        <Route exact path="/" element={<h1 style={{backgroundColor:"black", color:"white" , textAlign:"center"}}>Welcome to the Crypto App! <br></br> Made by: <b>Anjali Kumari</b></h1>
-    
-
-      
-      } />
+        <Route
+          exact
+          path="/"
+          element={
+            <h1 style={{ backgroundColor: 'black', color: 'white', textAlign: 'center' }}>
+              Welcome to the Crypto App! <br></br> Made by: <b>Anjali Kumari</b>
+            </h1>
+          }
+        />
         <Route path="/exchanges" element={<ExchangeList />} />
       </Routes>
     </Router>
